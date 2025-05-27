@@ -1,28 +1,1000 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dr. Fernando Topanotti Tarabay - Neurologista</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
     <style>
-        body {
-            background: transparent; /* Isso remove qualquer fundo */
+        /* Importação da fonte Poppins */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+        :root {
+            --primary-blue: #2563eb;
+            --dark-blue: #1d4ed8;
+            --light-blue: #eff6ff;
+            --background-white-subtle: #fbfbfc; /* Um branco muito suave, quase imperceptível */
+            --gray-light: #f9fafb;
+            --gray-medium: #e5e7eb;
+            --gray-dark: #1f2937;
+            --text-gray: #4b5563;
+            --accent-blue: #60a5fa;
+            --shadow-light: rgba(0, 0, 0, 0.05);
+            --shadow-medium: rgba(0, 0, 0, 0.1);
+            --shadow-dark: rgba(0, 0, 0, 0.15);
+            --whatsapp-green: #25d366; /* Cor do WhatsApp */
+            --whatsapp-dark-green: #1da851;
         }
-        .botao-fixo {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            padding: 12px 24px;
-            background-color: #007bff;
-            color: white;
+
+        /* Base styles */
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            color: var(--text-gray);
+            background-color: var(--background-white-subtle); /* Novo fundo */
+            overflow-x: hidden; /* Prevent horizontal scroll from animations */
+        }
+
+        .min-h-screen {
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+            padding-left: 1rem;
+            padding-right: 1rem;
+        }
+
+        /* Header */
+        header {
+            background-color: white;
+            box-shadow: 0 4px 6px -1px var(--shadow-medium), 0 2px 4px -1px var(--shadow-light);
+            padding: 1.5rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        header .flex {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h1 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--gray-dark);
+            margin: 0;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo-animation {
+            width: 2.5rem;
+            height: 2.5rem;
+            color: var(--primary-blue);
+            animation: pulse-brain 2s infinite ease-in-out;
+        }
+
+        /* Navigation */
+        nav {
+            display: none; /* Hidden on small screens by default */
+        }
+
+        nav.open {
+            display: flex;
+            flex-direction: column;
+            position: absolute;
+            top: 100%; /* Below the header */
+            left: 0;
+            width: 100%;
+            background-color: white;
+            box-shadow: 0 4px 6px -1px var(--shadow-medium);
+            padding: 1rem 0;
+            align-items: center;
+            gap: 0.5rem;
+            animation: slideDown 0.3s ease-out forwards;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .nav-button {
+            background: none;
             border: none;
             cursor: pointer;
-            border-radius: 5px;
-            font-size: 16px;
-            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
-            z-index: 1000;
+            padding: 0.5rem 1rem;
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--text-gray);
+            position: relative;
+            transition: color 0.3s ease-in-out;
+            width: fit-content; /* Ensure buttons don't stretch fully on mobile */
+        }
+
+        .nav-button:hover {
+            color: var(--primary-blue);
+        }
+
+        .nav-button.active {
+            color: var(--primary-blue);
+        }
+
+        .nav-button.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            height: 3px;
+            background-color: var(--primary-blue);
+            border-radius: 2px;
+            animation: expandUnderline 0.3s forwards;
+        }
+
+        @keyframes expandUnderline {
+            from { width: 0; }
+            to { width: 80%; }
+        }
+
+        /* Menu Button for Mobile */
+        .menu-button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0.5rem;
+            display: block; /* Show on small screens */
+            color: var(--gray-dark);
+            transition: color 0.3s ease;
+        }
+
+        .menu-button:hover {
+            color: var(--primary-blue);
+        }
+
+        /* Hero Section */
+        .hero-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2rem;
+            padding: 3rem 0;
+            text-align: center;
+        }
+
+        .avatar-container {
+            width: 16rem;
+            height: 16rem;
+            border-radius: 9999px;
+            overflow: hidden;
+            border: 6px solid var(--primary-blue);
+            box-shadow: 0 10px 20px var(--shadow-dark);
+            transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55); /* Springy effect */
+        }
+
+        .avatar-container:hover {
+            transform: scale(1.08); /* Only hover effect */
+        }
+
+        .avatar-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .hero-content h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--gray-dark);
+            margin-bottom: 1rem;
+        }
+
+        .hero-content p {
+            font-size: 1.25rem;
+            color: var(--primary-blue);
+            font-weight: 500;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-content .description {
+            font-size: 1rem;
+            color: var(--text-gray);
+            margin-bottom: 2rem;
+        }
+
+        .hero-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        /* Buttons */
+        .button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.75rem 1.5rem;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+            border: 2px solid transparent;
+            text-decoration: none; /* For anchor tags if used as buttons */
+        }
+
+        .primary-button {
+            background-color: var(--primary-blue);
+            color: white;
+            box-shadow: 0 4px 8px rgba(37, 99, 235, 0.3);
+        }
+
+        .primary-button:hover {
+            background-color: var(--dark-blue);
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 6px 12px rgba(37, 99, 235, 0.4);
+        }
+
+        .outline-button {
+            background-color: transparent;
+            color: var(--primary-blue);
+            border-color: var(--primary-blue);
+        }
+
+        .outline-button:hover {
+            background-color: var(--light-blue);
+            color: var(--dark-blue);
+            border-color: var(--dark-blue);
+            transform: translateY(-3px) scale(1.02);
+        }
+
+        .whatsapp-button {
+            background-color: var(--whatsapp-green);
+            color: white;
+            box-shadow: 0 4px 8px rgba(37, 211, 102, 0.3);
+        }
+
+        .whatsapp-button:hover {
+            background-color: var(--whatsapp-dark-green);
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 6px 12px rgba(37, 211, 102, 0.4);
+        }
+
+
+        /* Content Sections */
+        .content-section {
+            display: none;
+            padding: 3rem 0;
+            animation: fadeIn 0.6s ease-out forwards;
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        .content-section h3 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--gray-dark);
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        /* Cards */
+        .card {
+            background-color: white;
+            border-radius: 0.75rem;
+            box-shadow: 0 2px 8px var(--shadow-medium);
+            transition: transform 0.3s ease-out, box-shadow 0.3s ease-out, background-color 0.3s ease, color 0.3s ease; /* Added background-color and color to transition */
+            overflow: hidden; /* For rounded corners on hover */
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 6px 16px var(--shadow-dark);
+        }
+
+        .card-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--gray-medium);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            text-align: center;
+            transition: border-color 0.3s ease; /* Transition for border-bottom color */
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--gray-dark);
+            margin-top: 1rem;
+            transition: color 0.3s ease; /* Transition for title color */
+        }
+
+        .card-description {
+            font-size: 0.95rem;
+            color: var(--text-gray);
+            margin-top: 0.5rem;
+        }
+
+        .card-content {
+            padding: 1.5rem;
+            transition: color 0.3s ease; /* Transition for content text color */
+        }
+
+        .card-content ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .card-content li {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .card-content li:last-child {
+            margin-bottom: 0;
+        }
+
+        .icon-circle {
+            background-color: var(--light-blue);
+            padding: 0.75rem;
+            border-radius: 9999px;
+            margin-right: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            color: var(--primary-blue);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .card-content li:hover .icon-circle {
+            background-color: var(--primary-blue);
+            color: white;
+        }
+
+        /* Adjustments for specialty cards after icon removal */
+        .specialty-card .card-header {
+            padding-bottom: 1.5rem;
+            padding-top: 1.5rem;
+        }
+        .specialty-card .card-title {
+            margin-top: 0;
+        }
+        .specialty-card .card-content {
+            text-align: center;
+        }
+
+        /* NEW: Hover effect for specialty cards */
+        .specialty-card:hover {
+            background-color: var(--primary-blue); /* Change background to blue */
+        }
+        .specialty-card:hover .card-header {
+            border-bottom-color: var(--dark-blue); /* Darken header border on hover */
+        }
+        .specialty-card:hover .card-title,
+        .specialty-card:hover .card-content p {
+            color: white; /* Change text color to white */
+        }
+
+
+        /* Contact Section */
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--gray-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .input-field,
+        textarea {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid var(--gray-medium);
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            color: var(--gray-dark);
+            outline: none;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .input-field:focus,
+        textarea:focus {
+            border-color: var(--primary-blue);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        /* Social Media Icons */
+        .social-icons a {
+            color: var(--text-gray);
+            transition: color 0.3s ease-in-out, transform 0.3s ease-in-out;
+            font-size: 1.5rem; /* Larger icons for social media */
+        }
+
+        .social-icons a:hover {
+            color: var(--primary-blue);
+            transform: translateY(-3px);
+        }
+
+        /* Remove underline from specific links */
+        .no-underline {
+            text-decoration: none;
+        }
+        .no-underline:hover {
+            text-decoration: underline; /* Add underline on hover if desired for interaction feedback */
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--gray-dark);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+        }
+
+        footer .flex-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        footer .logo-container {
+            margin-bottom: 1rem;
+        }
+
+        footer .logo-container span {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: white;
+        }
+
+        footer .text-gray-400 {
+            color: #9ca3af;
+        }
+
+        footer .footer-links a {
+            color: var(--text-gray);
+            transition: color 0.3s ease-in-out;
+            text-decoration: none; /* Ensure no underline for footer links */
+        }
+
+        footer .footer-links a:hover {
+            color: white;
+            text-decoration: underline; /* Add underline on hover for feedback */
+        }
+
+        .copyright {
+            padding-top: 1.5rem;
+            border-top: 1px solid #374151;
+            margin-top: 2rem;
+            font-size: 0.9rem;
+            color: var(--text-gray);
+        }
+
+        /* General utility classes for spacing, flex, grid */
+        .space-x-2 > *:not([hidden]) ~ *:not([hidden]) { margin-left: 0.5rem; }
+        .space-x-3 > *:not([hidden]) ~ *:not([hidden]) { margin-left: 0.75rem; }
+        .space-x-6 > *:not([hidden]) ~ *:not([hidden]) { margin-left: 1.5rem; }
+        .space-x-8 > *:not([hidden]) ~ *:not([hidden]) { margin-left: 2rem; }
+        .space-y-4 > *:not([hidden]) ~ *:not([hidden]) { margin-top: 1rem; }
+
+        .gap-4 { gap: 1rem; }
+        .gap-6 { gap: 1.5rem; }
+        .gap-8 { gap: 2rem; }
+
+        .flex { display: flex; }
+        .flex-col { flex-direction: column; }
+        .flex-wrap { flex-wrap: wrap; }
+        .items-center { align-items: center; }
+        .justify-center { justify-content: center; }
+        .justify-between { justify-content: space-between; }
+
+        .grid { display: grid; }
+
+        .w-full { width: 100%; }
+
+        /* Animation delays for fade-in-up */
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fade-in-up 0.7s ease-out forwards;
+        }
+
+        .fade-in-up.delay-1 { animation-delay: 0.1s; }
+        .fade-in-up.delay-2 { animation-delay: 0.2s; }
+        .fade-in-up.delay-3 { animation-delay: 0.3s; }
+        .fade-in-up.delay-4 { animation-delay: 0.4s; }
+        .fade-in-up.delay-5 { animation-delay: 0.5s; }
+
+
+        @keyframes fade-in-up {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Responsive adjustments */
+        @media (min-width: 768px) { /* Tablets and larger */
+            nav { display: flex; } /* Show desktop nav */
+            nav.open { /* Override for desktop view when menu was open */
+                position: static;
+                flex-direction: row;
+                box-shadow: none;
+                padding: 0;
+                align-items: center;
+                gap: 2rem; /* Restore desktop gap */
+            }
+            .menu-button { display: none; } /* Hide menu button */
+            .hero-section {
+                flex-direction: row;
+                text-align: left;
+            }
+            .md\:w-1\/3 { width: 33.333333%; }
+            .md\:w-2\/3 { width: 66.666667%; }
+            .hero-buttons { justify-content: flex-start; }
+            .content-section h3 { text-align: left; }
+            .md\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+            footer .flex-container { flex-direction: row; }
+            footer .logo-container { margin-bottom: 0; }
+        }
+
+        @media (min-width: 1024px) {
+            .lg\:grid-cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+            .lg\:grid-cols-5 { grid-template-columns: repeat(5, minmax(0, 1fr)); /* For 5 specialties */ }
         }
     </style>
 </head>
 <body>
-    <button class="botao-fixo">Clique Aqui2</button>
+    <div class="min-h-screen">
+        <header>
+            <div class="container flex">
+                <div class="logo-container">
+                    <i data-lucide="brain" class="lucide logo-animation"></i>
+                    <h1 class="text-gray-800">Dr. Fernando Topanotti Tarabay</h1>
+                </div>
+                <nav id="main-nav" class="space-x-8">
+                    <button id="nav-about" class="nav-button active" data-tab="about">
+                        Sobre
+                    </button>
+                    <button id="nav-specialties" class="nav-button" data-tab="specialties">
+                        Especialidades
+                    </button>
+                    <button id="nav-contact" class="nav-button" data-tab="contact">
+                        Contato
+                    </button>
+                </nav>
+                <button class="menu-button" id="mobile-menu-button">
+                    <i data-lucide="menu" class="lucide w-6 h-6"></i>
+                </button>
+            </div>
+        </header>
+
+        <main class="container py-12">
+            <section class="hero-section mb-16">
+                <div class="md\:w-1\/3 flex justify-center fade-in-up">
+                    <div class="avatar-container">
+                        <img src="https://static.wixstatic.com/media/47c0e9_f22dc9bde8b94d269b1c7b175b8323ed~mv2.jpg/v1/fill/w_406,h_334,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/1.jpg" alt="Dr. Fernando Topanotti Tarabay" class="avatar-image">
+                    </div>
+                </div>
+                <div class="md\:w-2\/3 hero-content fade-in-up delay-1">
+                    <h2 class="text-gray-800">Dr. Fernando Topanotti Tarabay</h2>
+                    <p class="text-xl text-blue-600 font-medium mb-1">Pós Graduado em Neurologia Vascular, Pós Graduado em Dor.</p>
+                    <p class="text-lg text-blue-600 font-medium mb-4">CRM/SC 22270 - RQE 18272.</p>
+                    <p class="description mb-2">
+                        Especialista em neurologia, com foco em <strong>dor crônica e tratamento de AVC</strong>, dedicado ao diagnóstico e tratamento de doenças do sistema nervoso com abordagem humanizada e baseada em evidências científicas.
+                    </p>
+                    <p class="description mb-6">
+                        Atualmente atende em Criciúma, nos hospitais <strong>Hospital São João Batista</strong>, <strong>Aura Neurologia</strong> e <strong>Hospital São José</strong>.
+                    </p>
+                    <div class="hero-buttons">
+                        <a href="https://wa.me/+5548991140848" target="_blank" class="button whatsapp-button">
+                            <i data-lucide="message-square-text" class="lucide mr-2 h-4 w-4"></i> Agendar via WhatsApp
+                        </a>
+                        <button class="button primary-button" data-tab="contact">
+                            <i data-lucide="calendar" class="lucide mr-2 h-4 w-4"></i> Agendar Consulta
+                        </button>
+                        <button class="button outline-button" data-tab="specialties">
+                            Minhas Especialidades
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <section id="about-section" class="content-section active mb-16">
+                <h3 class="text-gray-800 fade-in-up">Formação e Experiência</h3>
+                <div class="grid md\:grid-cols-2 gap-6">
+                    <div class="card fade-in-up delay-1">
+                        <div class="card-header">
+                            <h4 class="card-title">Formação Acadêmica</h4>
+                        </div>
+                        <div class="card-content">
+                            <ul>
+                                <li>
+                                    <div class="icon-circle">
+                                        <i data-lucide="graduation-cap" class="lucide w-5 h-5"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-medium text-gray-800">Medicina - UNESC (Universidade do Extremo Sul Catarinense)</h4>
+                                        <p class="text-sm text-gray-600">Início: 2010</p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="icon-circle">
+                                        <i data-lucide="award" class="lucide w-5 h-5"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-medium text-gray-800">Residência em Neurologia - [Nome da Instituição]</h4>
+                                        <p class="text-sm text-gray-600">Ano de Conclusão</p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="card fade-in-up delay-2">
+                        <div class="card-header">
+                            <h4 class="card-title">Experiência Profissional</h4>
+                        </div>
+                        <div class="card-content">
+                            <ul>
+                                <li>
+                                    <div class="icon-circle">
+                                        <i data-lucide="building" class="lucide w-5 h-5"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-medium text-gray-800">Aura Neurologia - Criciúma, SC</h4>
+                                        <p class="text-sm text-gray-600">Atuação atual</p>
+                                        <a href="https://www.auraneurologia.com/" target="_blank" class="text-xs text-blue-600 no-underline hover:underline">Visitar site da clínica</a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="icon-circle">
+                                        <i data-lucide="hospital" class="lucide w-5 h-5"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-medium text-gray-800">Hospital São João Batista - Criciúma, SC</h4>
+                                        <p class="text-sm text-gray-600">Atuação atual</p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="icon-circle">
+                                        <i data-lucide="hospital" class="lucide w-5 h-5"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-medium text-gray-800">Hospital São José - Criciúma, SC</h4>
+                                        <p class="text-sm text-gray-600">Atuação atual</p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="icon-circle">
+                                        <i data-lucide="archive" class="lucide w-5 h-5"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-medium text-gray-800">Hospital Moinhos de Vento - Anterior</h4>
+                                        <p class="text-sm text-gray-600">Atuação anterior</p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="specialties-section" class="content-section mb-16">
+                <h3 class="text-gray-800 fade-in-up">Áreas de Especialização</h3>
+                <div class="grid sm:grid-cols-2 lg:grid-cols-5 gap-6"> <div class="card specialty-card fade-in-up delay-1">
+                        <div class="card-header">
+                            <h4 class="card-title">Epilepsia</h4>
+                        </div>
+                        <div class="card-content">
+                            <p>Diagnóstico e tratamento especializado</p>
+                        </div>
+                    </div>
+                    <div class="card specialty-card fade-in-up delay-2">
+                        <div class="card-header">
+                            <h4 class="card-title">Doenças Cerebrovasculares (AVC)</h4>
+                        </div>
+                        <div class="card-content">
+                            <p>Diagnóstico e tratamento especializado, incluindo <strong>AVC</strong></p>
+                        </div>
+                    </div>
+                    <div class="card specialty-card fade-in-up delay-3">
+                        <div class="card-header">
+                            <h4 class="card-title">Doenças Neurodegenerativas</h4>
+                        </div>
+                        <div class="card-content">
+                            <p>Diagnóstico e tratamento especializado</p>
+                        </div>
+                    </div>
+                    <div class="card specialty-card fade-in-up delay-4">
+                        <div class="card-header">
+                            <h4 class="card-title">Cefaleias (Dores de Cabeça)</h4>
+                        </div>
+                        <div class="card-content">
+                            <p>Diagnóstico e tratamento especializado para diversos tipos de cefaleias</p>
+                        </div>
+                    </div>
+                    <div class="card specialty-card fade-in-up delay-5">
+                        <div class="card-header">
+                            <h4 class="card-title">Dor Crônica</h4>
+                        </div>
+                        <div class="card-content">
+                            <p>Manejo e tratamento de condições de <strong>dor persistente</strong></p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="contact-section" class="content-section mb-16">
+                <h3 class="text-gray-800 fade-in-up">Entre em Contato</h3>
+                <div class="grid md\:grid-cols-2 gap-8">
+                    <div class="card fade-in-up delay-1">
+                        <div class="card-header">
+                            <h4 class="card-title">Informações de Contato</h4>
+                        </div>
+                        <div class="card-content">
+                            <ul>
+                                <li>
+                                    <div class="icon-circle">
+                                        <i data-lucide="phone" class="lucide w-5 h-5"></i>
+                                    </div>
+                                    <div>
+                                        <p class="font-medium text-gray-800">Telefone</p>
+                                        <p class="text-gray-600">(48) 99114-0848</p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="icon-circle">
+                                        <i data-lucide="message-square-text" class="lucide w-5 h-5"></i>
+                                    </div>
+                                    <div>
+                                        <p class="font-medium text-gray-800">WhatsApp</p>
+                                        <p class="text-gray-600">(48) 99114-0848</p>
+                                        <a href="https://wa.me/+5548991140848" target="_blank" class="text-xs text-blue-600 no-underline hover:underline">Iniciar conversa</a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="icon-circle">
+                                        <i data-lucide="mail" class="lucide w-5 h-5"></i>
+                                    </div>
+                                    <div>
+                                        <p class="font-medium text-gray-800">Email</p>
+                                        <p class="text-gray-600">contato@drfernandotopanotti.com.br</p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="icon-circle">
+                                        <i data-lucide="map-pin" class="lucide w-5 h-5"></i>
+                                    </div>
+                                    <div>
+                                        <p class="font-medium text-gray-800">Endereço</p>
+                                        <p class="text-gray-600">Criciúma, SC</p>
+                                        <p class="text-gray-600">Clínica Aura Neurologia</p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="icon-circle">
+                                        <i data-lucide="calendar-days" class="lucide w-5 h-5"></i>
+                                    </div>
+                                    <div>
+                                        <p class="font-medium text-gray-800">Horário de Atendimento</p>
+                                        <p class="text-gray-600">Segunda a Sexta: 8h às 18h</p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="icon-circle">
+                                        <i data-lucide="share-2" class="lucide w-5 h-5"></i>
+                                    </div>
+                                    <div>
+                                        <p class="font-medium text-gray-800">Redes Sociais</p>
+                                        <div class="flex space-x-3 mt-1 social-icons">
+                                            <a href="https://instagram.com/fernandotopanotti.neuro?igshid=MzRlODBiNWFlZA==" target="_blank" title="Instagram">
+                                                <i data-lucide="instagram"></i>
+                                            </a>
+                                            <a href="https://www.facebook.com/fernando.topanottitarabay?mibextid=ZbWKwL" target="_blank" title="Facebook">
+                                                <i data-lucide="facebook"></i>
+                                            </a>
+                                            <a href="https://www.threads.net/@fernandotopanotti.neuro" target="_blank" title="Threads">
+                                                <i data-lucide="message-circle"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="card fade-in-up delay-2">
+                        <div class="card-header">
+                            <h4 class="card-title">Agende uma Consulta</h4>
+                            <p class="card-description">Preencha o formulário abaixo e entraremos em contato</p>
+                        </div>
+                        <div class="card-content">
+                            <form class="space-y-4">
+                                <div class="form-group">
+                                    <label for="name">Nome</label>
+                                    <input
+                                        type="text"
+                                        id="name"
+                                        class="input-field"
+                                        placeholder="Seu nome completo"
+                                    />
+                                </div>
+                                <div class="form-group">
+                                    <label for="phone">Telefone</label>
+                                    <input
+                                        type="tel"
+                                        id="phone"
+                                        class="input-field"
+                                        placeholder="(00) 00000-0000"
+                                    />
+                                </div>
+                                <div class="form-group">
+                                    <label for="message">Mensagem</label>
+                                    <textarea
+                                        id="message"
+                                        rows="3"
+                                        class="input-field"
+                                        placeholder="Descreva brevemente o motivo da consulta"
+                                    ></textarea>
+                                </div>
+                                <button type="submit" class="button primary-button w-full">
+                                    Enviar Solicitação
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <div class="container flex-container">
+                <div class="logo-container">
+                    <i data-lucide="brain" class="lucide w-6 h-6 text-accent-blue"></i>
+                    <span>Dr. Fernando Topanotti Tarabay</span>
+                </div>
+                <div class="flex space-x-6 footer-links">
+                    <a href="#" class="text-gray-400">
+                        Termos de Uso
+                    </a>
+                    <a href="#" class="text-gray-400">
+                        Política de Privacidade
+                    </a>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; <span id="current-year"></span> Dr. Fernando Topanotti Tarabay. Todos os direitos reservados.</p>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const navButtons = document.querySelectorAll('.nav-button');
+            const contentSections = document.querySelectorAll('.content-section');
+            const heroButtons = document.querySelectorAll('.hero-section .button');
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mainNav = document.getElementById('main-nav');
+
+            function setActiveTab(tabId) {
+                // Close mobile menu if open when a tab is clicked
+                if (mainNav.classList.contains('open')) {
+                    mainNav.classList.remove('open');
+                    // Change icon back to menu on close
+                    mobileMenuButton.querySelector('i').setAttribute('data-lucide', 'menu');
+                    lucide.createIcons(); // Re-render icon
+                }
+
+                // Remove 'active' from all nav buttons
+                navButtons.forEach(button => {
+                    button.classList.remove('active');
+                });
+
+                // Add 'active' to the clicked nav button
+                const activeButton = document.querySelector(`.nav-button[data-tab="${tabId}"]`);
+                if (activeButton) {
+                    activeButton.classList.add('active');
+                }
+
+                // Hide all content sections
+                contentSections.forEach(section => {
+                    section.classList.remove('active');
+                });
+
+                // Show the active content section
+                const activeSection = document.getElementById(`${tabId}-section`);
+                if (activeSection) {
+                    activeSection.classList.add('active');
+                    // Re-trigger fade-in-up for elements in the newly active section
+                    activeSection.querySelectorAll('.fade-in-up').forEach(el => {
+                        el.classList.remove('fade-in-up'); // Remove to allow re-animation
+                        void el.offsetWidth; // Trigger reflow
+                        el.classList.add('fade-in-up');
+                    });
+                }
+            }
+
+            // Event listeners for navigation buttons
+            navButtons.forEach(button => {
+                button.addEventListener('click', (event) => {
+                    const tabId = event.target.dataset.tab;
+                    setActiveTab(tabId);
+                });
+            });
+
+            // Event listeners for hero section buttons
+            heroButtons.forEach(button => {
+                button.addEventListener('click', (event) => {
+                    const tabId = event.target.dataset.tab || event.target.closest('button').dataset.tab;
+                    if (tabId) {
+                        setActiveTab(tabId);
+                    }
+                });
+            });
+
+            // Mobile menu toggle
+            mobileMenuButton.addEventListener('click', () => {
+                mainNav.classList.toggle('open');
+                const icon = mobileMenuButton.querySelector('i');
+                if (mainNav.classList.contains('open')) {
+                    icon.setAttribute('data-lucide', 'x'); // Change to close icon
+                } else {
+                    icon.setAttribute('data-lucide', 'menu'); // Change back to menu icon
+                }
+                lucide.createIcons(); // Re-render icon
+            });
+
+            // Set initial active tab to 'about'
+            setActiveTab('about');
+
+            // Set current year in footer
+            const currentYearSpan = document.getElementById('current-year');
+            if (currentYearSpan) {
+                currentYearSpan.textContent = new Date().getFullYear();
+            }
+        });
+
+        // Inicializa os ícones do Lucide
+        lucide.createIcons();
+    </script>
 </body>
 </html>
-
