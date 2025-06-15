@@ -1,12 +1,15 @@
 // script.js
 document.addEventListener('DOMContentLoaded', () => {
+    // --- SELETORES ---
     const allTabButtons = document.querySelectorAll('[data-tab]');
     const contentSections = document.querySelectorAll('.content-section');
     const navUnderline = document.querySelector('.nav-underline');
     const mainNav = document.getElementById('main-nav');
     const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const flipCards = document.querySelectorAll('.flip-card'); // Para Mitos e Verdades
+    const faqItems = document.querySelectorAll('.faq-item');   // Para FAQ
 
-    // Função para atualizar a posição do underline da navegação
+    // --- FUNÇÕES DE NAVEGAÇÃO E ABAS ---
     const updateUnderline = (activeButton) => {
         if (activeButton && window.innerWidth >= 993) {
             navUnderline.style.width = `${activeButton.offsetWidth}px`;
@@ -17,7 +20,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    // Função para definir a aba ativa
     const setActiveTab = (tabId, isInitialLoad = false) => {
         allTabButtons.forEach(button => {
             button.classList.toggle('active', button.dataset.tab === tabId);
@@ -37,7 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    // --- LÓGICA DO CARROSSEL ATUALIZADA ---
+    // --- LÓGICA DO CARROSSEL ---
     const initializeCarousel = () => {
         const carousels = document.querySelectorAll('.carousel-container');
         carousels.forEach(carousel => {
@@ -49,7 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             let currentIndex = 0;
             const totalImages = images.length;
-            let slideInterval; // Variável para o intervalo
+            let slideInterval;
 
             const firstClone = images[0].cloneNode(true);
             const lastClone = images[totalImages - 1].cloneNode(true);
@@ -70,12 +72,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 slides.style.transform = `translateX(-${(currentIndex + 1) * 100}%)`;
             };
 
-            // Inicia o avanço automático
             const startSlideShow = () => {
-                slideInterval = setInterval(moveToNextSlide, 5000); // 5000ms = 5 segundos
+                slideInterval = setInterval(moveToNextSlide, 5000);
             };
 
-            // Para o avanço automático
             const stopSlideShow = () => {
                 clearInterval(slideInterval);
             };
@@ -92,18 +92,61 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
 
-            nextBtn.addEventListener('click', moveToNextSlide);
-            prevBtn.addEventListener('click', moveToPrevSlide);
+            nextBtn.addEventListener('click', () => {
+                moveToNextSlide();
+                stopSlideShow();
+                startSlideShow();
+            });
 
-            // Pausa ao passar o mouse e retoma ao tirar
+            prevBtn.addEventListener('click', () => {
+                moveToPrevSlide();
+                stopSlideShow();
+                startSlideShow();
+            });
+
             carousel.addEventListener('mouseenter', stopSlideShow);
             carousel.addEventListener('mouseleave', startSlideShow);
 
-            startSlideShow(); // Inicia o carrossel
+            startSlideShow();
         });
     };
 
-    // Event Listeners
+    // --- LÓGICA PARA MITOS E VERDADES ---
+    const initializeFlipCards = () => {
+        flipCards.forEach(card => {
+            card.addEventListener('click', () => {
+                card.classList.toggle('active');
+            });
+        });
+    };
+
+    // --- LÓGICA PARA FAQ INTELIGENTE ---
+    const initializeFaq = () => {
+        faqItems.forEach(item => {
+            const question = item.querySelector('.faq-question');
+            const icon = item.querySelector('.faq-icon');
+
+            question.addEventListener('click', () => {
+                const isActive = item.classList.contains('active');
+                faqItems.forEach(otherItem => {
+                    if (otherItem !== item) {
+                        otherItem.classList.remove('active');
+                        otherItem.querySelector('.faq-icon').setAttribute('data-lucide', 'plus');
+                    }
+                });
+                if (!isActive) {
+                    item.classList.add('active');
+                    icon.setAttribute('data-lucide', 'minus');
+                } else {
+                    item.classList.remove('active');
+                    icon.setAttribute('data-lucide', 'plus');
+                }
+                lucide.createIcons();
+            });
+        });
+    };
+
+    // --- EVENT LISTENERS GERAIS ---
     allTabButtons.forEach(button => {
         button.addEventListener('click', () => setActiveTab(button.dataset.tab));
     });
@@ -121,9 +164,11 @@ document.addEventListener('DOMContentLoaded', () => {
         updateUnderline(activeNavButton);
     });
 
-    // Inicialização
+    // --- INICIALIZAÇÃO DE TODAS AS FUNÇÕES ---
     setActiveTab('about', true);
     initializeCarousel();
+    initializeFlipCards();
+    initializeFaq();
     lucide.createIcons();
     document.getElementById('current-year').textContent = new Date().getFullYear();
 });
