@@ -93,14 +93,14 @@
                         </p>
                     </div>
                     <div class="about-image-container fade-in-up delay-2">
-                        <div class="carousel-container">
+                        <div class="carousel-container js-carousel">
                             <div class="carousel-slides">
                                 <img src="images/img1.jpg" alt="Dra. Vanessa Damin"
-                                    class="carousel-image about-image" />
+                                    class="carousel-image about-image carousel-slide-item" />
                                 <img src="images/img3.jpg" alt="Dra. Vanessa Damin em consulta"
-                                    class="carousel-image about-image" />
+                                    class="carousel-image about-image carousel-slide-item" />
                                 <img src="images/img5.jpg" alt="Dra. Vanessa e Dr. Fernando"
-                                    class="carousel-image about-image" />
+                                    class="carousel-image about-image carousel-slide-item" />
                             </div>
                             <button class="carousel-arrow prev" aria-label="Imagem anterior">
                                 <i data-lucide="chevron-left"></i>
@@ -312,48 +312,223 @@
                 </div>
             </section>
 
-            <section id="testimonials-section" class="content-section container">
-                <h3>O que os Pacientes Dizem</h3>
-                <div class="grid md:grid-cols-1 lg:grid-cols-3 gap-8">
-                    <div class="testimonial-card fade-in-up delay-1">
-                        <div class="testimonial-content"><i data-lucide="quote" class="testimonial-quote-icon"></i>
-                            <p class="testimonial-text">A Dra. Vanessa é uma profissional excepcional. Tive meu
-                                diagnóstico de hipertensão e ela me guiou com muita paciência e conhecimento. Hoje,
-                                minha pressão está controlada e me sinto muito mais seguro.</p>
+            <section id="testimonials-section" class="content-section">
+                <div class="container">
+                    <h3>O que os Pacientes Dizem</h3>
+                </div>
+                <div class="carousel-container scrolling-carousel">
+                    <div class="carousel-slides">
+                        <div class="testimonial-card carousel-slide-item">
+                            <div class="testimonial-header"><i data-lucide="circle-user-round"
+                                    class="testimonial-avatar"></i>
+                                <div class="testimonial-author">
+                                    <h5 class="author-name">João Carlos M.</h5>
+                                    <div class="testimonial-rating"><i data-lucide="star" class="star-filled"></i><i
+                                            data-lucide="star" class="star-filled"></i><i data-lucide="star"
+                                            class="star-filled"></i><i data-lucide="star" class="star-filled"></i><i
+                                            data-lucide="star" class="star-filled"></i></div>
+                                </div>
+                            </div>
+                            <div class="testimonial-content">
+                                <p class="testimonial-text">A Dra. Vanessa é uma profissional excepcional. Tive meu
+                                    diagnóstico de hipertensão e ela me guiou com muita paciência e conhecimento. Hoje,
+                                    minha pressão está controlada e me sinto muito mais seguro.</p>
+                            </div>
                         </div>
-                        <div class="testimonial-author">
-                            <div class="author-info">
-                                <h5 class="author-name">João Carlos M.</h5>
-                                <p class="author-title">Paciente</p>
+                        <div class="testimonial-card carousel-slide-item">
+                            <div class="testimonial-header"><i data-lucide="circle-user-round"
+                                    class="testimonial-avatar"></i>
+                                <div class="testimonial-author">
+                                    <h5 class="author-name">Maria Eduarda S.</h5>
+                                    <div class="testimonial-rating"><i data-lucide="star" class="star-filled"></i><i
+                                            data-lucide="star" class="star-filled"></i><i data-lucide="star"
+                                            class="star-filled"></i><i data-lucide="star" class="star-filled"></i><i
+                                            data-lucide="star" class="star-filled"></i></div>
+                                </div>
+                            </div>
+                            <div class="testimonial-content">
+                                <p class="testimonial-text">Fiz meu check-up anual com a Dra. Vanessa e fiquei
+                                    impressionada com o cuidado e a atenção aos detalhes. Uma consulta completa, sem
+                                    pressa, que me deixou muito tranquila quanto à saúde do meu coração.</p>
+                            </div>
+                        </div>
+                        <div class="testimonial-card carousel-slide-item">
+                            <div class="testimonial-header"><i data-lucide="circle-user-round"
+                                    class="testimonial-avatar"></i>
+                                <div class="testimonial-author">
+                                    <h5 class="author-name">Roberto F.</h5>
+                                    <div class="testimonial-rating"><i data-lucide="star" class="star-filled"></i><i
+                                            data-lucide="star" class="star-filled"></i><i data-lucide="star"
+                                            class="star-filled"></i><i data-lucide="star" class="star-filled"></i><i
+                                            data-lucide="star" class="star-filled"></i></div>
+                                </div>
+                            </div>
+                            <div class="testimonial-content">
+                                <p class="testimonial-text">Depois de um grande susto, precisei de acompanhamento
+                                    cardiológico contínuo. Encontrei na Dra. Vanessa uma médica humana e extremamente
+                                    competente. Sou muito grato por todo o cuidado.</p>
+                            </div>
+                        </div>
+                        <div class="testimonial-card carousel-slide-item">
+                            <div class="testimonial-header"><i data-lucide="circle-user-round"
+                                    class="testimonial-avatar"></i>
+                                <div class="testimonial-author">
+                                    <h5 class="author-name">Ana Lúcia P.</h5>
+                                    <div class="testimonial-rating"><i data-lucide="star" class="star-filled"></i><i
+                                            data-lucide="star" class="star-filled"></i><i data-lucide="star"
+                                            class="star-filled"></i><i data-lucide="star" class="star-filled"></i><i
+                                            data-lucide="star" class="star-filled"></i></div>
+                                </div>
+                            </div>
+                            <div class="testimonial-content">
+                                <p class="testimonial-text">Tinha muito medo por causa da minha arritmia. A Dra. Vanessa
+                                    foi incrível, explicou cada passo do tratamento e hoje me sinto confiante e segura.
+                                    Uma médica que realmente se importa.</p>
+                            </div>
+                        </div>
+                        <div class="testimonial-card carousel-slide-item">
+                            <div class="testimonial-header"><i data-lucide="circle-user-round"
+                                    class="testimonial-avatar"></i>
+                                <div class="testimonial-author">
+                                    <h5 class="author-name">Carlos V.</h5>
+                                    <div class="testimonial-rating"><i data-lucide="star" class="star-filled"></i><i
+                                            data-lucide="star" class="star-filled"></i><i data-lucide="star"
+                                            class="star-filled"></i><i data-lucide="star" class="star-filled"></i><i
+                                            data-lucide="star" class="star-filled"></i></div>
+                                </div>
+                            </div>
+                            <div class="testimonial-content">
+                                <p class="testimonial-text">Faço meu acompanhamento preventivo com a Dra. Vanessa há
+                                    anos. É uma profissional exemplar, sempre atualizada e que valoriza a prevenção
+                                    tanto quanto o tratamento. Recomendo de olhos fechados.</p>
+                            </div>
+                        </div>
+                        <div class="testimonial-card carousel-slide-item">
+                            <div class="testimonial-header"><i data-lucide="circle-user-round"
+                                    class="testimonial-avatar"></i>
+                                <div class="testimonial-author">
+                                    <h5 class="author-name">Sandra G.</h5>
+                                    <div class="testimonial-rating"><i data-lucide="star" class="star-filled"></i><i
+                                            data-lucide="star" class="star-filled"></i><i data-lucide="star"
+                                            class="star-filled"></i><i data-lucide="star" class="star-filled"></i><i
+                                            data-lucide="star" class="star-filled"></i></div>
+                                </div>
+                            </div>
+                            <div class="testimonial-content">
+                                <p class="testimonial-text">Levei meu pai para uma consulta e fiquei emocionada. A
+                                    paciência e o carinho com que ela tratou um paciente idoso, explicando tudo de forma
+                                    clara, fez toda a diferença para nós. Excelente cardiogeriatra.</p>
+                            </div>
+                        </div>
+                        <div class="testimonial-card carousel-slide-item" aria-hidden="true">
+                            <div class="testimonial-header"><i data-lucide="circle-user-round"
+                                    class="testimonial-avatar"></i>
+                                <div class="testimonial-author">
+                                    <h5 class="author-name">João Carlos M.</h5>
+                                    <div class="testimonial-rating"><i data-lucide="star" class="star-filled"></i><i
+                                            data-lucide="star" class="star-filled"></i><i data-lucide="star"
+                                            class="star-filled"></i><i data-lucide="star" class="star-filled"></i><i
+                                            data-lucide="star" class="star-filled"></i></div>
+                                </div>
+                            </div>
+                            <div class="testimonial-content">
+                                <p class="testimonial-text">A Dra. Vanessa é uma profissional excepcional. Tive meu
+                                    diagnóstico de hipertensão e ela me guiou com muita paciência e conhecimento. Hoje,
+                                    minha pressão está controlada e me sinto muito mais seguro.</p>
+                            </div>
+                        </div>
+                        <div class="testimonial-card carousel-slide-item" aria-hidden="true">
+                            <div class="testimonial-header"><i data-lucide="circle-user-round"
+                                    class="testimonial-avatar"></i>
+                                <div class="testimonial-author">
+                                    <h5 class="author-name">Maria Eduarda S.</h5>
+                                    <div class="testimonial-rating"><i data-lucide="star" class="star-filled"></i><i
+                                            data-lucide="star" class="star-filled"></i><i data-lucide="star"
+                                            class="star-filled"></i><i data-lucide="star" class="star-filled"></i><i
+                                            data-lucide="star" class="star-filled"></i></div>
+                                </div>
+                            </div>
+                            <div class="testimonial-content">
+                                <p class="testimonial-text">Fiz meu check-up anual com a Dra. Vanessa e fiquei
+                                    impressionada com o cuidado e a atenção aos detalhes. Uma consulta completa, sem
+                                    pressa, que me deixou muito tranquila quanto à saúde do meu coração.</p>
+                            </div>
+                        </div>
+                        <div class="testimonial-card carousel-slide-item" aria-hidden="true">
+                            <div class="testimonial-header"><i data-lucide="circle-user-round"
+                                    class="testimonial-avatar"></i>
+                                <div class="testimonial-author">
+                                    <h5 class="author-name">Roberto F.</h5>
+                                    <div class="testimonial-rating"><i data-lucide="star" class="star-filled"></i><i
+                                            data-lucide="star" class="star-filled"></i><i data-lucide="star"
+                                            class="star-filled"></i><i data-lucide="star" class="star-filled"></i><i
+                                            data-lucide="star" class="star-filled"></i></div>
+                                </div>
+                            </div>
+                            <div class="testimonial-content">
+                                <p class="testimonial-text">Depois de um grande susto, precisei de acompanhamento
+                                    cardiológico contínuo. Encontrei na Dra. Vanessa uma médica humana e extremamente
+                                    competente. Sou muito grato por todo o cuidado.</p>
+                            </div>
+                        </div>
+                        <div class="testimonial-card carousel-slide-item" aria-hidden="true">
+                            <div class="testimonial-header"><i data-lucide="circle-user-round"
+                                    class="testimonial-avatar"></i>
+                                <div class="testimonial-author">
+                                    <h5 class="author-name">Ana Lúcia P.</h5>
+                                    <div class="testimonial-rating"><i data-lucide="star" class="star-filled"></i><i
+                                            data-lucide="star" class="star-filled"></i><i data-lucide="star"
+                                            class="star-filled"></i><i data-lucide="star" class="star-filled"></i><i
+                                            data-lucide="star" class="star-filled"></i></div>
+                                </div>
+                            </div>
+                            <div class="testimonial-content">
+                                <p class="testimonial-text">Tinha muito medo por causa da minha arritmia. A Dra. Vanessa
+                                    foi incrível, explicou cada passo do tratamento e hoje me sinto confiante e segura.
+                                    Uma médica que realmente se importa.</p>
+                            </div>
+                        </div>
+                        <div class="testimonial-card carousel-slide-item" aria-hidden="true">
+                            <div class="testimonial-header"><i data-lucide="circle-user-round"
+                                    class="testimonial-avatar"></i>
+                                <div class="testimonial-author">
+                                    <h5 class="author-name">Carlos V.</h5>
+                                    <div class="testimonial-rating"><i data-lucide="star" class="star-filled"></i><i
+                                            data-lucide="star" class="star-filled"></i><i data-lucide="star"
+                                            class="star-filled"></i><i data-lucide="star" class="star-filled"></i><i
+                                            data-lucide="star" class="star-filled"></i></div>
+                                </div>
+                            </div>
+                            <div class="testimonial-content">
+                                <p class="testimonial-text">Faço meu acompanhamento preventivo com a Dra. Vanessa há
+                                    anos. É uma profissional exemplar, sempre atualizada e que valoriza a prevenção
+                                    tanto quanto o tratamento. Recomendo de olhos fechados.</p>
+                            </div>
+                        </div>
+                        <div class="testimonial-card carousel-slide-item" aria-hidden="true">
+                            <div class="testimonial-header"><i data-lucide="circle-user-round"
+                                    class="testimonial-avatar"></i>
+                                <div class="testimonial-author">
+                                    <h5 class="author-name">Sandra G.</h5>
+                                    <div class="testimonial-rating"><i data-lucide="star" class="star-filled"></i><i
+                                            data-lucide="star" class="star-filled"></i><i data-lucide="star"
+                                            class="star-filled"></i><i data-lucide="star" class="star-filled"></i><i
+                                            data-lucide="star" class="star-filled"></i></div>
+                                </div>
+                            </div>
+                            <div class="testimonial-content">
+                                <p class="testimonial-text">Levei meu pai para uma consulta e fiquei emocionada. A
+                                    paciência e o carinho com que ela tratou um paciente idoso, explicando tudo de forma
+                                    clara, fez toda a diferença para nós. Excelente cardiogeriatra.</p>
                             </div>
                         </div>
                     </div>
-                    <div class="testimonial-card fade-in-up delay-2">
-                        <div class="testimonial-content"><i data-lucide="quote" class="testimonial-quote-icon"></i>
-                            <p class="testimonial-text">Fiz meu check-up anual com a Dra. Vanessa e fiquei impressionada
-                                com o cuidado e a atenção aos detalhes. Uma consulta completa, sem pressa, que me deixou
-                                muito tranquila quanto à saúde do meu coração.</p>
-                        </div>
-                        <div class="testimonial-author">
-                            <div class="author-info">
-                                <h5 class="author-name">Maria Eduarda S.</h5>
-                                <p class="author-title">Paciente</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="testimonial-card fade-in-up delay-3">
-                        <div class="testimonial-content"><i data-lucide="quote" class="testimonial-quote-icon"></i>
-                            <p class="testimonial-text">Depois de um grande susto, precisei de acompanhamento
-                                cardiológico contínuo. Encontrei na Dra. Vanessa uma médica humana e extremamente
-                                competente. Sou muito grato por todo o cuidado.</p>
-                        </div>
-                        <div class="testimonial-author">
-                            <div class="author-info">
-                                <h5 class="author-name">Roberto F.</h5>
-                                <p class="author-title">Paciente</p>
-                            </div>
-                        </div>
-                    </div>
+                </div>
+
+                <div class="testimonial-form-trigger-container">
+                    <button id="open-testimonial-modal-btn" class="button primary-button">
+                        <i data-lucide="edit" style="margin-right: 0.5rem;"></i> Deixe seu Depoimento
+                    </button>
                 </div>
             </section>
 
@@ -586,6 +761,47 @@
         </footer>
     </div>
 
+    <div id="testimonial-modal-overlay" class="modal-overlay hidden">
+        <div id="testimonial-modal-content" class="modal-content">
+            <button id="testimonial-modal-close-btn" class="modal-close-btn">
+                <i data-lucide="x"></i>
+            </button>
+            <h3>Sua Opinião é Importante</h3>
+            <form id="testimonial-form">
+                <div class="form-group">
+                    <label for="testimonial-name">Nome Completo:</label>
+                    <input type="text" id="testimonial-name" name="testimonial-name" class="input-field" required />
+                </div>
+                <div class="form-group">
+                    <label>Avaliação:</label>
+                    <div id="testimonial-rating-stars" class="rating-stars" data-rating="0">
+                        <i data-lucide="star" data-value="1"></i>
+                        <i data-lucide="star" data-value="2"></i>
+                        <i data-lucide="star" data-value="3"></i>
+                        <i data-lucide="star" data-value="4"></i>
+                        <i data-lucide="star" data-value="5"></i>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="testimonial-message">Seu Depoimento:</label>
+                    <textarea id="testimonial-message" name="testimonial-message" class="input-field" rows="5"
+                        required></textarea>
+                </div>
+                <button type="submit" class="button primary-button w-full">Enviar Depoimento</button>
+            </form>
+        </div>
+        <div id="testimonial-success-message" class="modal-content hidden">
+            <button id="testimonial-success-close-btn" class="modal-close-btn">
+                <i data-lucide="x"></i>
+            </button>
+            <div class="success-content">
+                <i data-lucide="check-circle-2" class="success-icon"></i>
+                <h4 class="success-title">Enviado com sucesso!</h4>
+                <p class="success-text">Recebemos o seu depoimento e iremos analisá-lo cuidadosamente para garantir que
+                    esteja de acordo com nossas diretrizes.</p>
+            </div>
+        </div>
+    </div>
     <script src="script.js"></script>
     <script src="splash.js"></script>
 </body>
