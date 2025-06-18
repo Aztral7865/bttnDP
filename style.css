@@ -1,15 +1,14 @@
-/* style.css */
+/* style.css (versão final com ajuste de posição da imagem do carrossel) */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
 :root {
     --primary-red: #D91A4D;
-    /* Vermelho principal da logo */
     --dark-red: #A61439;
-    /* Tom mais escuro para hover */
     --light-pink: #FEEAEE;
-    /* Rosa claro para fundos */
-    --background-white-subtle: #fdfbfb;
-    --gray-light: #f9fafb;
+    --background-white-subtle: #F2EEF0;
+    --gray-light: #F2EEF0;
+    --card-background-color: #FAF7F8;
+    --star-yellow: #FFC700;
     --gray-medium: #e5e7eb;
     --gray-dark: #1f2937;
     --text-gray: #4b5563;
@@ -19,10 +18,20 @@
     --whatsapp-green: #25d366;
     --whatsapp-dark-green: #1da851;
     --truth-green: #16a34a;
-    /* Verde para "Verdade" */
     --myth-red: #dc2626;
-    /* Vermelho para "Mito" */
 }
+
+/* --- ANIMAÇÃO DE SCROLL --- */
+@keyframes scroll {
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(calc(-100% - var(--gap)));
+    }
+}
+
 
 /* --- ESTILOS GERAIS --- */
 body {
@@ -94,7 +103,8 @@ header h1 {
 
 .content-section {
     display: none;
-    padding: 3rem 0;
+    padding-top: 3rem;
+    padding-bottom: 3rem;
     animation: fadeIn 0.6s ease-out forwards;
 }
 
@@ -318,7 +328,7 @@ header h1 {
 
 /* --- CARDS (FORMAÇÃO, ESPECIALIDADES) --- */
 .card {
-    background-color: white;
+    background-color: var(--card-background-color);
     border-radius: 0.75rem;
     box-shadow: 0 2px 8px var(--shadow-medium);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -430,37 +440,63 @@ header h1 {
     border-color: transparent;
 }
 
-/* --- SEÇÃO DEPOIMENTOS --- */
+/* --- SEÇÃO DEPOIMENTOS (SCROLLING CAROUSEL) --- */
+#testimonials-section {
+    background-color: #ffffff;
+    padding-top: 3rem;
+    padding-bottom: 4rem;
+}
+
+.scrolling-carousel {
+    max-width: 100%;
+    overflow: hidden;
+    -webkit-mask: linear-gradient(90deg, transparent, white 20%, white 80%, transparent);
+    mask: linear-gradient(90deg, transparent, white 20%, white 80%, transparent);
+}
+
+.scrolling-carousel .carousel-slides {
+    --gap: 2rem;
+    display: flex;
+    gap: var(--gap);
+    width: max-content;
+    animation: scroll 80s linear infinite;
+}
+
+.scrolling-carousel:hover .carousel-slides,
+.scrolling-carousel:active .carousel-slides {
+    animation-play-state: paused;
+}
+
 .testimonial-card {
-    background-color: var(--gray-light);
+    background-color: var(--light-pink);
     padding: 2rem;
     border-radius: 0.75rem;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    height: 100%;
-    border-left: 5px solid var(--primary-red);
+    box-shadow: var(--shadow-medium);
+    width: 360px;
+    flex-shrink: 0;
 }
 
-.testimonial-quote-icon {
-    color: var(--primary-red);
-    opacity: 0.5;
-    width: 2.5rem;
-    height: 2.5rem;
-    margin-bottom: 1rem;
-}
-
-.testimonial-text {
-    font-style: italic;
-    color: var(--text-gray);
+.testimonial-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
     margin-bottom: 1.5rem;
-    flex-grow: 1;
+}
+
+.testimonial-avatar {
+    width: 60px;
+    height: 60px;
+    color: var(--primary-red);
+    stroke-width: 1.5;
+    flex-shrink: 0;
+    background-color: transparent;
 }
 
 .testimonial-author {
     display: flex;
-    align-items: center;
-    gap: 1rem;
+    flex-direction: column;
 }
 
 .author-name {
@@ -469,42 +505,49 @@ header h1 {
     margin: 0;
 }
 
-.author-title {
-    font-size: 0.9rem;
+.testimonial-rating {
+    display: flex;
+    gap: 0.25rem;
+}
+
+.testimonial-rating .star-filled {
+    color: var(--star-yellow);
+    fill: var(--star-yellow);
+    width: 1rem;
+    height: 1rem;
+}
+
+.testimonial-content {
+    flex-grow: 1;
+}
+
+.testimonial-text {
+    font-style: italic;
     color: var(--text-gray);
     margin: 0;
 }
 
-/* --- SEÇÃO MITOS E VERDADES (ESTILOS CORRIGIDOS E FINALIZADOS) --- */
-
-/* Estilo para dar um fundo suave à seção inteira */
+/* --- SEÇÃO MITOS E VERDADES --- */
 #myths-section {
     background-color: var(--gray-light);
 }
 
-/* Garante o espaçamento entre os cards na grade */
 #myths-section .grid {
     gap: 2rem;
-    /* Espaçamento de 32px entre os cards */
 }
 
-/* O contêiner de cada card. Define a perspectiva 3D. */
 .flip-card {
     background-color: transparent;
-    /* 1. ALTURA AJUSTADA para deixar o card mais compacto */
     height: 280px;
     perspective: 1500px;
     cursor: pointer;
-    /* Adicionamos uma transição suave para o efeito de elevação */
     transition: transform 0.3s ease;
 }
 
-/* Efeito de elevação ao passar o mouse (não se aplica a cards já virados) */
 .flip-card:not(.active):hover {
     transform: translateY(-10px);
 }
 
-/* A parte interna que efetivamente gira. */
 .flip-card-inner {
     position: relative;
     width: 100%;
@@ -514,17 +557,13 @@ header h1 {
     transform-style: preserve-3d;
 }
 
-/* A regra que faz o card virar quando a classe '.active' é adicionada */
 .flip-card.active .flip-card-inner {
     transform: rotateY(180deg);
 }
 
-/* Estilos comuns para a frente e o verso do card */
 .flip-card-front,
 .flip-card-back {
-    /* 2. A CORREÇÃO CRÍTICA E DEFINITIVA ESTÁ AQUI */
     box-sizing: border-box;
-
     position: absolute;
     top: 0;
     left: 0;
@@ -541,9 +580,8 @@ header h1 {
     box-shadow: var(--shadow-medium);
 }
 
-/* Estilos específicos para a FRENTE do card */
 .flip-card-front {
-    background: white;
+    background: var(--card-background-color);
     border: 1px solid var(--gray-medium);
 }
 
@@ -570,7 +608,6 @@ header h1 {
     bottom: 1.5rem;
 }
 
-/* Estilos específicos para o VERSO do card */
 .flip-card-back {
     background-color: var(--gray-dark);
     color: white;
@@ -601,7 +638,7 @@ header h1 {
     margin: 0;
 }
 
-/* --- NOVA SEÇÃO: FAQ INTELIGENTE (ACCORDION) --- */
+/* --- SEÇÃO FAQ --- */
 .faq-container {
     max-width: 800px;
     margin: 0 auto;
@@ -644,7 +681,6 @@ header h1 {
 
 .faq-item.active .faq-answer {
     max-height: 300px;
-    /* Altura suficiente para a resposta */
 }
 
 .faq-item.active .faq-icon {
@@ -697,6 +733,13 @@ header h1 {
     margin-top: 1.5rem;
 }
 
+#contact-section form {
+    background-color: var(--card-background-color);
+    padding: 1.5rem;
+    border-radius: 0.75rem;
+    box-shadow: var(--shadow-medium);
+}
+
 .form-group {
     margin-bottom: 1.5rem;
 }
@@ -747,14 +790,13 @@ footer {
     color: #9ca3af;
 }
 
-/* --- CARROSSEL --- */
-.about-image-container {
+/* --- CARROSSEL (GERAL) --- */
+.js-carousel .carousel-slides {
     display: flex;
-    justify-content: center;
     align-items: center;
 }
 
-.carousel-container {
+.js-carousel {
     position: relative;
     width: 100%;
     max-width: 400px;
@@ -765,27 +807,22 @@ footer {
     aspect-ratio: 1 / 1;
 }
 
-.carousel-slides {
-    display: flex;
-    height: 100%;
-}
 
 .carousel-image {
     width: 100%;
-    height: 100%;
     flex-shrink: 0;
-    object-fit: cover;
+    object-fit: contain;
 }
 
-.carousel-arrow {
+.js-carousel .carousel-arrow {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background-color: rgba(255, 255, 255, 0.7);
+    background-color: rgba(255, 255, 255, 0.8);
     border: none;
     border-radius: 50%;
-    width: 40px;
-    height: 40px;
+    width: 44px;
+    height: 44px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -794,17 +831,18 @@ footer {
     transition: all 0.3s ease;
     z-index: 10;
     color: var(--primary-red);
+    box-shadow: var(--shadow-medium);
 }
 
-.carousel-container:hover .carousel-arrow {
+.js-carousel:hover .carousel-arrow {
     opacity: 1;
 }
 
-.carousel-arrow.prev {
+.js-carousel .carousel-arrow.prev {
     left: 10px;
 }
 
-.carousel-arrow.next {
+.js-carousel .carousel-arrow.next {
     right: 10px;
 }
 
@@ -849,8 +887,7 @@ footer {
         text-align: center;
     }
 
-    .about-image-container {
-        order: -1;
+    .js-carousel {
         margin-bottom: 2rem;
     }
 
@@ -889,4 +926,135 @@ footer {
     .nav-underline {
         display: none;
     }
+}
+
+/* --- ESTILOS ADICIONAIS PARA DEPOIMENTOS --- */
+
+/* Container do botão "Deixe seu depoimento" */
+.testimonial-form-trigger-container {
+    text-align: center;
+    margin-top: 3rem;
+    /* Espaçamento acima do botão */
+}
+
+/* Modal Overlay: A camada escura que cobre o site */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    /* Fundo semi-transparente */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+    padding: 1rem;
+}
+
+/* Animação para mostrar o modal */
+.modal-overlay:not(.hidden) {
+    opacity: 1;
+}
+
+/* Conteúdo do Modal: A caixa branca do formulário/sucesso */
+.modal-content {
+    background-color: var(--card-background-color);
+    padding: 2.5rem;
+    border-radius: 0.75rem;
+    box-shadow: var(--shadow-dark);
+    position: relative;
+    width: 100%;
+    max-width: 550px;
+    transform: translateY(20px) scale(0.95);
+    transition: transform 0.3s ease-out;
+}
+
+.modal-overlay:not(.hidden) .modal-content {
+    transform: translateY(0) scale(1);
+}
+
+.modal-content.hidden {
+    display: none;
+}
+
+/* Botão de fechar (X) no canto do modal */
+.modal-close-btn {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--text-gray);
+    padding: 0.5rem;
+    border-radius: 50%;
+    transition: background-color 0.2s ease;
+}
+
+.modal-close-btn:hover {
+    background-color: var(--gray-medium);
+}
+
+.modal-content h3 {
+    margin-top: 0;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+/* Sistema de avaliação por estrelas (simplificado) */
+.rating-stars {
+    display: flex;
+    gap: 0.5rem;
+    cursor: pointer;
+}
+
+/* Aplica o estilo a QUALQUER elemento com data-value (seja <i> ou <svg>) */
+.rating-stars [data-value] {
+    width: 28px;
+    height: 28px;
+    color: var(--gray-medium);
+    fill: transparent;
+    transition: color 0.2s ease, transform 0.2s ease;
+}
+
+/* Aplica o preenchimento a QUALQUER elemento com data-value que tenha a classe .filled */
+.rating-stars [data-value].filled {
+    color: var(--star-yellow);
+    fill: var(--star-yellow);
+}
+
+/* Adiciona o efeito de escala no hover a QUALQUER estrela */
+.rating-stars [data-value]:hover {
+    transform: scale(1.15);
+}
+
+/* Mensagem de sucesso */
+.success-content {
+    text-align: center;
+    padding: 1rem;
+}
+
+.success-icon {
+    width: 60px;
+    height: 60px;
+    color: var(--truth-green);
+    /* Usando a variável de cor 'truth' */
+    margin-bottom: 1rem;
+}
+
+.success-title {
+    font-size: 1.5rem;
+    color: var(--gray-dark);
+    margin: 0 0 0.5rem 0;
+}
+
+.success-text {
+    font-size: 1rem;
+    color: var(--text-gray);
+    line-height: 1.6;
+    margin: 0;
 }
