@@ -1,4 +1,4 @@
-// script.js (versão FINAL E CORRIGIDA com Delegação de Eventos)
+// script.js (versão FINAL E CORRIGIDA com Delegação de Eventos e Scroll to Top)
 document.addEventListener('DOMContentLoaded', () => {
     // --- SELETORES ---
     const allTabButtons = document.querySelectorAll('[data-tab]');
@@ -37,6 +37,16 @@ document.addEventListener('DOMContentLoaded', () => {
             mobileMenuButton.querySelector('i').setAttribute('data-lucide', 'menu');
             lucide.createIcons();
         }
+
+        // INÍCIO DA NOVA ALTERAÇÃO: Scroll para o topo
+        // Se não for o carregamento inicial da página, rola a tela suavemente para o topo.
+        if (!isInitialLoad) {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+        // FIM DA NOVA ALTERAÇÃO
     };
 
     // --- LÓGICA DO CARROSSEL "SOBRE MIM" (COM BOTÕES) ---
@@ -169,15 +179,14 @@ document.addEventListener('DOMContentLoaded', () => {
         const closeSuccessBtn = document.getElementById('testimonial-success-close-btn');
         const form = document.getElementById('testimonial-form');
         const starsContainer = document.getElementById('testimonial-rating-stars');
-
-        if (!starsContainer) return;
+        
+        if (!starsContainer) return; 
 
         const openModal = () => modalOverlay.classList.remove('hidden');
         const closeModal = () => modalOverlay.classList.add('hidden');
 
         const updateStars = (rating) => {
             const numericRating = parseInt(rating, 10) || 0;
-            // Seleciona os elementos com data-value dentro do container no momento da execução
             const currentStars = starsContainer.querySelectorAll('[data-value]');
             currentStars.forEach(s => {
                 const starValue = parseInt(s.dataset.value, 10);
@@ -185,10 +194,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         };
 
-        // INÍCIO DA SOLUÇÃO COM DELEGAÇÃO DE EVENTOS
-        // Um único escutador no container pai
         starsContainer.addEventListener('click', (e) => {
-            // e.target.closest encontra o elemento clicado ou o seu pai mais próximo que tenha o atributo
             const starElement = e.target.closest('[data-value]');
             if (starElement) {
                 const ratingValue = starElement.dataset.value;
@@ -203,15 +209,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 updateStars(starElement.dataset.value);
             }
         });
-
-        // Quando o mouse sai de toda a área do container, reverte para a avaliação salva
+        
         starsContainer.addEventListener('mouseout', () => {
             updateStars(starsContainer.dataset.rating);
         });
-        // FIM DA SOLUÇÃO COM DELEGAÇÃO DE EVENTOS
 
         const resetForm = () => {
-            form.reset();
+            if (form) form.reset();
             starsContainer.dataset.rating = "0";
             updateStars(0);
         };
@@ -221,11 +225,11 @@ document.addEventListener('DOMContentLoaded', () => {
         if (closeSuccessBtn) closeSuccessBtn.addEventListener('click', () => {
             closeModal();
             setTimeout(() => {
-                successMessage.classList.add('hidden');
-                formContent.classList.remove('hidden');
-            }, 300);
+                 if (successMessage) successMessage.classList.add('hidden');
+                 if (formContent) formContent.classList.remove('hidden');
+            }, 300); 
         });
-
+        
         if (modalOverlay) modalOverlay.addEventListener('click', (e) => {
             if (e.target === modalOverlay) {
                 closeModal();
@@ -234,8 +238,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (form) {
             form.addEventListener('submit', (e) => {
-                e.preventDefault();
-
+                e.preventDefault(); 
+                
                 const name = document.getElementById('testimonial-name').value;
                 const message = document.getElementById('testimonial-message').value;
                 const rating = starsContainer.dataset.rating;
@@ -244,11 +248,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     alert('Por favor, preencha todos os campos e selecione uma avaliação.');
                     return;
                 }
-
-                formContent.classList.add('hidden');
-                successMessage.classList.remove('hidden');
-                lucide.createIcons();
-
+                
+                if (formContent) formContent.classList.add('hidden');
+                if (successMessage) successMessage.classList.remove('hidden');
+                lucide.createIcons(); 
+                
                 resetForm();
             });
         }
