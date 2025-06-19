@@ -1,4 +1,4 @@
-// script.js (versão FINAL E CORRIGIDA com Delegação de Eventos e Scroll to Top)
+// script.js (versão com correção de bug do carrossel automático)
 document.addEventListener('DOMContentLoaded', () => {
     // --- SELETORES ---
     const allTabButtons = document.querySelectorAll('[data-tab]');
@@ -38,18 +38,15 @@ document.addEventListener('DOMContentLoaded', () => {
             lucide.createIcons();
         }
 
-        // INÍCIO DA NOVA ALTERAÇÃO: Scroll para o topo
-        // Se não for o carregamento inicial da página, rola a tela suavemente para o topo.
         if (!isInitialLoad) {
             window.scrollTo({
                 top: 0,
                 behavior: 'smooth'
             });
         }
-        // FIM DA NOVA ALTERAÇÃO
     };
 
-    // --- LÓGICA DO CARROSSEL "SOBRE MIM" (COM BOTÕES) ---
+    // --- LÓGICA DO CARROSSEL "SOBRE MIM" (COM CORREÇÃO DE BUG) ---
     const initializeJsCarousel = () => {
         const carousels = document.querySelectorAll('.js-carousel');
 
@@ -67,7 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             let currentIndex = 0;
             const totalItems = items.length;
-            let slideInterval;
+            let slideInterval = null; // Inicializa como nulo
 
             const firstClone = items[0].cloneNode(true);
             const lastClone = items[totalItems - 1].cloneNode(true);
@@ -103,7 +100,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
 
+            // INÍCIO DA CORREÇÃO
             const startSlideShow = () => {
+                // Garante que não haja múltiplos intervalos rodando
+                if (slideInterval) clearInterval(slideInterval);
                 slideInterval = setInterval(moveToNextSlide, 5000);
             };
 
@@ -127,10 +127,26 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
             }
 
+            // Pausa ao passar o mouse por cima
             carousel.addEventListener('mouseenter', stopSlideShow);
             carousel.addEventListener('mouseleave', startSlideShow);
 
-            startSlideShow();
+            // Cria o "vigia" para o carrossel
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        // Se o carrossel está na tela, inicia a transição
+                        startSlideShow();
+                    } else {
+                        // Se o carrossel não está na tela, para a transição
+                        stopSlideShow();
+                    }
+                });
+            });
+
+            // Manda o "vigia" observar o elemento do carrossel
+            observer.observe(carousel);
+            // FIM DA CORREÇÃO
         });
     };
 
@@ -179,8 +195,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const closeSuccessBtn = document.getElementById('testimonial-success-close-btn');
         const form = document.getElementById('testimonial-form');
         const starsContainer = document.getElementById('testimonial-rating-stars');
-        
-        if (!starsContainer) return; 
+
+        if (!starsContainer) return;
 
         const openModal = () => modalOverlay.classList.remove('hidden');
         const closeModal = () => modalOverlay.classList.add('hidden');
@@ -209,7 +225,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 updateStars(starElement.dataset.value);
             }
         });
-        
+
         starsContainer.addEventListener('mouseout', () => {
             updateStars(starsContainer.dataset.rating);
         });
@@ -225,11 +241,11 @@ document.addEventListener('DOMContentLoaded', () => {
         if (closeSuccessBtn) closeSuccessBtn.addEventListener('click', () => {
             closeModal();
             setTimeout(() => {
-                 if (successMessage) successMessage.classList.add('hidden');
-                 if (formContent) formContent.classList.remove('hidden');
-            }, 300); 
+                if (successMessage) successMessage.classList.add('hidden');
+                if (formContent) formContent.classList.remove('hidden');
+            }, 300);
         });
-        
+
         if (modalOverlay) modalOverlay.addEventListener('click', (e) => {
             if (e.target === modalOverlay) {
                 closeModal();
@@ -238,8 +254,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (form) {
             form.addEventListener('submit', (e) => {
-                e.preventDefault(); 
-                
+                e.preventDefault();
+
                 const name = document.getElementById('testimonial-name').value;
                 const message = document.getElementById('testimonial-message').value;
                 const rating = starsContainer.dataset.rating;
@@ -248,11 +264,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     alert('Por favor, preencha todos os campos e selecione uma avaliação.');
                     return;
                 }
-                
+
                 if (formContent) formContent.classList.add('hidden');
                 if (successMessage) successMessage.classList.remove('hidden');
-                lucide.createIcons(); 
-                
+                lucide.createIcons();
+
                 resetForm();
             });
         }
