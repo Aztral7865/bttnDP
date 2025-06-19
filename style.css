@@ -965,6 +965,7 @@ footer {
 }
 
 /* Conteúdo do Modal: A caixa branca do formulário/sucesso */
+/* Bloco do modal CORRIGIDO para melhor responsividade */
 .modal-content {
     box-sizing: border-box;
     background-color: var(--card-background-color);
@@ -972,8 +973,9 @@ footer {
     border-radius: 0.75rem;
     box-shadow: var(--shadow-dark);
     position: relative;
-    width: 100%;
-    max-width: 550px;
+    max-width: 550px; /* Mantém a largura máxima em telas grandes */
+    width: auto; /* Permite que o modal encolha em telas pequenas */
+    margin: 0 1rem; /* Adiciona uma margem para não colar nas bordas do celular */
     transform: translateY(20px) scale(0.95);
     transition: transform 0.3s ease-out;
 }
