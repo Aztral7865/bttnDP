@@ -1,4 +1,4 @@
-// script.js (versão com formulário de contato para WhatsApp)
+// script.js (versão com correção de scroll no mobile)
 document.addEventListener('DOMContentLoaded', () => {
     // --- SELETORES ---
     const allTabButtons = document.querySelectorAll('[data-tab]');
@@ -38,11 +38,11 @@ document.addEventListener('DOMContentLoaded', () => {
             lucide.createIcons();
         }
 
+        // --- CORREÇÃO DO SCROLL ---
+        // Se não for o carregamento inicial, rola para o topo.
+        // Removido o 'behavior: smooth' para garantir compatibilidade com mobile.
         if (!isInitialLoad) {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
+            window.scrollTo(0, 0);
         }
     };
 
@@ -50,7 +50,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const initializeJsCarousel = () => {
         const carousels = document.querySelectorAll('.js-carousel');
         carousels.forEach(carousel => {
-            // ... (código do carrossel que já está funcionando)
             const slides = carousel.querySelector('.carousel-slides');
             const items = slides.querySelectorAll('.carousel-slide-item');
             const prevBtn = carousel.querySelector('.carousel-arrow.prev');
@@ -165,7 +164,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- LÓGICA DO FORMULÁRIO DE DEPOIMENTO ---
     const initializeTestimonialForm = () => {
-        // ... (código do formulário de depoimento que já está funcionando)
         const openModalBtn = document.getElementById('open-testimonial-modal-btn');
         const modalOverlay = document.getElementById('testimonial-modal-overlay');
         const formContent = document.getElementById('testimonial-modal-content');
@@ -239,29 +237,23 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    // --- Formulário de Contato para WhatsApp ---
+    // --- LÓGICA: Formulário de Contato para WhatsApp ---
     const initializeContactForm = () => {
         const contactForm = document.getElementById('contact-form');
         if (contactForm) {
             contactForm.addEventListener('submit', function (event) {
-                event.preventDefault(); // Impede o envio padrão
+                event.preventDefault(); 
 
-                // Captura os valores dos campos do formulário de contato
                 const name = document.getElementById('name').value;
                 const email = document.getElementById('email').value;
                 const message = document.getElementById('message').value;
-                const numeroWhatsApp = '5548991140848'; // Número de WhatsApp da Dra. Vanessa
+                const numeroWhatsApp = '5548991140848';
 
-                // Monta a mensagem com os dados do formulário
                 const mensagemTemplate = `Olá, Dra. Vanessa! Meu nome é *${name}*.\n\nEntro em contato através do seu site.\n\n*E-mail para retorno:* ${email}\n\n*Mensagem:*\n${message}`;
 
-                // Codifica a mensagem para ser usada em uma URL
                 const mensagemCodificada = encodeURIComponent(mensagemTemplate);
-
-                // Cria o link final para o WhatsApp
                 const linkWhatsApp = `https://wa.me/${numeroWhatsApp}?text=${mensagemCodificada}`;
 
-                // Abre o link em uma nova aba e limpa o formulário
                 window.open(linkWhatsApp, '_blank');
                 contactForm.reset();
             });
@@ -281,6 +273,8 @@ document.addEventListener('DOMContentLoaded', () => {
         icon.setAttribute('data-lucide', isMenuOpen ? 'x' : 'menu');
         lucide.createIcons();
     });
+
+
 
     window.addEventListener('resize', () => {
         const activeNavButton = document.querySelector('#main-nav .nav-button.active');
