@@ -966,18 +966,25 @@ footer {
 
 /* Conteúdo do Modal: A caixa branca do formulário/sucesso */
 /* Bloco do modal CORRIGIDO para melhor responsividade */
+/* Bloco do modal CORRIGIDO com abordagem direta de largura */
 .modal-content {
     box-sizing: border-box;
     background-color: var(--card-background-color);
-    padding: 2.5rem;
+    padding: 1.5rem; /* Padding reduzido para telas pequenas */
     border-radius: 0.75rem;
     box-shadow: var(--shadow-dark);
     position: relative;
-    max-width: 550px; /* Mantém a largura máxima em telas grandes */
-    width: auto; /* Permite que o modal encolha em telas pequenas */
-    margin: 0 1rem; /* Adiciona uma margem para não colar nas bordas do celular */
+    width: calc(100% - 2rem); /* Força a largura a ser 100% menos as margens */
+    max-width: 550px;
     transform: translateY(20px) scale(0.95);
     transition: transform 0.3s ease-out;
+}
+
+/* Restaura o padding maior em telas de desktop */
+@media (min-width: 768px) {
+    .modal-content {
+        padding: 2.5rem;
+    }
 }
 
 .modal-overlay:not(.hidden) .modal-content {
@@ -1073,10 +1080,4 @@ footer {
     background: -webkit-linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
     background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f09433', endColorstr='#bc1888', GradientType=1);
-}
-/* Ajuste de responsividade para o modal de depoimento */
-@media (max-width: 768px) {
-    .modal-content {
-        padding: 2rem 1.5rem; /* Reduz o espaçamento interno em telas menores */
-    }
 }
