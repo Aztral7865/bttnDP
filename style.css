@@ -219,6 +219,7 @@ header h1 {
     background: none;
     border: none;
     cursor: pointer;
+    color: var(--primary-red);
 }
 
 /* --- SEÇÃO HERO/SOBRE MIM --- */
