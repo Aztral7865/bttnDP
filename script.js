@@ -1,4 +1,4 @@
-// script.js (versão com correção de scroll no mobile e modal)
+// script.js (versão com correção "força bruta" de scroll no mobile)
 document.addEventListener('DOMContentLoaded', () => {
     // --- SELETORES ---
     const allTabButtons = document.querySelectorAll('[data-tab]');
@@ -38,11 +38,12 @@ document.addEventListener('DOMContentLoaded', () => {
             lucide.createIcons();
         }
 
-        // --- CORREÇÃO DO SCROLL com setTimeout ---
+        // --- CORREÇÃO "FORÇA BRUTA" DO SCROLL ---
         if (!isInitialLoad) {
-            // Atraso mínimo para garantir que o scroll ocorra após outras ações do navegador
             setTimeout(() => {
-                window.scrollTo(0, 0);
+                document.documentElement.scrollTop = 0; // Para Chrome, Firefox, IE e Opera
+                document.body.scrollTop = 0; // Para Safari
+                window.scrollTo(0, 0); // Como fallback final
             }, 0);
         }
     };
