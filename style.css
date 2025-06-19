@@ -692,7 +692,7 @@ header h1 {
 /* --- CONTATO E FOOTER --- */
 .contact-link {
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     gap: 1.25rem;
     text-decoration: none;
     color: inherit;
@@ -752,6 +752,7 @@ header h1 {
 }
 
 .input-field {
+    box-sizing: border-box;
     width: 100%;
     padding: 0.75rem 1rem;
     border: 1px solid var(--gray-medium);
@@ -1060,4 +1061,13 @@ footer {
     color: var(--text-gray);
     line-height: 1.6;
     margin: 0;
+}
+
+/* Efeito de hover especial para o ícone do Instagram */
+.contact-link:hover .icon-circle.instagram-hover {
+    background: #f09433;
+    background: -moz-linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+    background: -webkit-linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+    background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f09433', endColorstr='#bc1888', GradientType=1);
 }
