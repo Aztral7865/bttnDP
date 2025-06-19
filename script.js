@@ -1,4 +1,4 @@
-// script.js (versão com correção de scroll no mobile)
+// script.js (versão com correção de scroll no mobile e modal)
 document.addEventListener('DOMContentLoaded', () => {
     // --- SELETORES ---
     const allTabButtons = document.querySelectorAll('[data-tab]');
@@ -38,11 +38,12 @@ document.addEventListener('DOMContentLoaded', () => {
             lucide.createIcons();
         }
 
-        // --- CORREÇÃO DO SCROLL ---
-        // Se não for o carregamento inicial, rola para o topo.
-        // Removido o 'behavior: smooth' para garantir compatibilidade com mobile.
+        // --- CORREÇÃO DO SCROLL com setTimeout ---
         if (!isInitialLoad) {
-            window.scrollTo(0, 0);
+            // Atraso mínimo para garantir que o scroll ocorra após outras ações do navegador
+            setTimeout(() => {
+                window.scrollTo(0, 0);
+            }, 0);
         }
     };
 
