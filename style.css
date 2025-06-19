@@ -966,6 +966,7 @@ footer {
 
 /* Conteúdo do Modal: A caixa branca do formulário/sucesso */
 .modal-content {
+    box-sizing: border-box;
     background-color: var(--card-background-color);
     padding: 2.5rem;
     border-radius: 0.75rem;
@@ -1070,4 +1071,10 @@ footer {
     background: -webkit-linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
     background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f09433', endColorstr='#bc1888', GradientType=1);
+}
+/* Ajuste de responsividade para o modal de depoimento */
+@media (max-width: 768px) {
+    .modal-content {
+        padding: 2rem 1.5rem; /* Reduz o espaçamento interno em telas menores */
+    }
 }
