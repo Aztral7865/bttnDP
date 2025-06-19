@@ -1,4 +1,4 @@
-// script.js (versão com correção de bug do carrossel automático)
+// script.js (versão com formulário de contato para WhatsApp)
 document.addEventListener('DOMContentLoaded', () => {
     // --- SELETORES ---
     const allTabButtons = document.querySelectorAll('[data-tab]');
@@ -46,47 +46,40 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    // --- LÓGICA DO CARROSSEL "SOBRE MIM" (COM CORREÇÃO DE BUG) ---
+    // --- LÓGICA DO CARROSSEL "SOBRE MIM" ---
     const initializeJsCarousel = () => {
         const carousels = document.querySelectorAll('.js-carousel');
-
         carousels.forEach(carousel => {
+            // ... (código do carrossel que já está funcionando)
             const slides = carousel.querySelector('.carousel-slides');
             const items = slides.querySelectorAll('.carousel-slide-item');
             const prevBtn = carousel.querySelector('.carousel-arrow.prev');
             const nextBtn = carousel.querySelector('.carousel-arrow.next');
-
             if (items.length <= 1) {
                 if (prevBtn) prevBtn.style.display = 'none';
                 if (nextBtn) nextBtn.style.display = 'none';
                 return;
             };
-
             let currentIndex = 0;
             const totalItems = items.length;
-            let slideInterval = null; // Inicializa como nulo
-
+            let slideInterval = null;
             const firstClone = items[0].cloneNode(true);
             const lastClone = items[totalItems - 1].cloneNode(true);
             slides.appendChild(firstClone);
             slides.insertBefore(lastClone, items[0]);
-
             slides.style.transform = `translateX(-100%)`;
-
             const moveToNextSlide = () => {
                 if (currentIndex >= totalItems) return;
                 currentIndex++;
                 slides.style.transition = 'transform 0.5s ease-in-out';
                 slides.style.transform = `translateX(-${(currentIndex + 1) * 100}%)`;
             };
-
             const moveToPrevSlide = () => {
                 if (currentIndex < 0) return;
                 currentIndex--;
                 slides.style.transition = 'transform 0.5s ease-in-out';
                 slides.style.transform = `translateX(-${(currentIndex + 1) * 100}%)`;
             };
-
             slides.addEventListener('transitionend', () => {
                 if (currentIndex >= totalItems) {
                     slides.style.transition = 'none';
@@ -99,18 +92,13 @@ document.addEventListener('DOMContentLoaded', () => {
                     slides.style.transform = `translateX(-${(currentIndex + 1) * 100}%)`;
                 }
             });
-
-            // INÍCIO DA CORREÇÃO
             const startSlideShow = () => {
-                // Garante que não haja múltiplos intervalos rodando
                 if (slideInterval) clearInterval(slideInterval);
                 slideInterval = setInterval(moveToNextSlide, 5000);
             };
-
             const stopSlideShow = () => {
                 clearInterval(slideInterval);
             };
-
             if (nextBtn) {
                 nextBtn.addEventListener('click', () => {
                     moveToNextSlide();
@@ -118,7 +106,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     startSlideShow();
                 });
             }
-
             if (prevBtn) {
                 prevBtn.addEventListener('click', () => {
                     moveToPrevSlide();
@@ -126,27 +113,18 @@ document.addEventListener('DOMContentLoaded', () => {
                     startSlideShow();
                 });
             }
-
-            // Pausa ao passar o mouse por cima
             carousel.addEventListener('mouseenter', stopSlideShow);
             carousel.addEventListener('mouseleave', startSlideShow);
-
-            // Cria o "vigia" para o carrossel
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
-                        // Se o carrossel está na tela, inicia a transição
                         startSlideShow();
                     } else {
-                        // Se o carrossel não está na tela, para a transição
                         stopSlideShow();
                     }
                 });
             });
-
-            // Manda o "vigia" observar o elemento do carrossel
             observer.observe(carousel);
-            // FIM DA CORREÇÃO
         });
     };
 
@@ -185,8 +163,9 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     };
 
-    // --- LÓGICA DO FORMULÁRIO DE DEPOIMENTO (USANDO DELEGAÇÃO DE EVENTOS) ---
+    // --- LÓGICA DO FORMULÁRIO DE DEPOIMENTO ---
     const initializeTestimonialForm = () => {
+        // ... (código do formulário de depoimento que já está funcionando)
         const openModalBtn = document.getElementById('open-testimonial-modal-btn');
         const modalOverlay = document.getElementById('testimonial-modal-overlay');
         const formContent = document.getElementById('testimonial-modal-content');
@@ -195,12 +174,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const closeSuccessBtn = document.getElementById('testimonial-success-close-btn');
         const form = document.getElementById('testimonial-form');
         const starsContainer = document.getElementById('testimonial-rating-stars');
-
         if (!starsContainer) return;
-
         const openModal = () => modalOverlay.classList.remove('hidden');
         const closeModal = () => modalOverlay.classList.add('hidden');
-
         const updateStars = (rating) => {
             const numericRating = parseInt(rating, 10) || 0;
             const currentStars = starsContainer.querySelectorAll('[data-value]');
@@ -209,7 +185,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 s.classList.toggle('filled', starValue <= numericRating);
             });
         };
-
         starsContainer.addEventListener('click', (e) => {
             const starElement = e.target.closest('[data-value]');
             if (starElement) {
@@ -218,24 +193,20 @@ document.addEventListener('DOMContentLoaded', () => {
                 updateStars(ratingValue);
             }
         });
-
         starsContainer.addEventListener('mouseover', (e) => {
             const starElement = e.target.closest('[data-value]');
             if (starElement) {
                 updateStars(starElement.dataset.value);
             }
         });
-
         starsContainer.addEventListener('mouseout', () => {
             updateStars(starsContainer.dataset.rating);
         });
-
         const resetForm = () => {
             if (form) form.reset();
             starsContainer.dataset.rating = "0";
             updateStars(0);
         };
-
         if (openModalBtn) openModalBtn.addEventListener('click', openModal);
         if (closeModalBtn) closeModalBtn.addEventListener('click', closeModal);
         if (closeSuccessBtn) closeSuccessBtn.addEventListener('click', () => {
@@ -245,34 +216,58 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (formContent) formContent.classList.remove('hidden');
             }, 300);
         });
-
         if (modalOverlay) modalOverlay.addEventListener('click', (e) => {
             if (e.target === modalOverlay) {
                 closeModal();
             }
         });
-
         if (form) {
             form.addEventListener('submit', (e) => {
                 e.preventDefault();
-
                 const name = document.getElementById('testimonial-name').value;
                 const message = document.getElementById('testimonial-message').value;
                 const rating = starsContainer.dataset.rating;
-
                 if (name.trim() === '' || message.trim() === '' || !rating || rating === '0') {
                     alert('Por favor, preencha todos os campos e selecione uma avaliação.');
                     return;
                 }
-
                 if (formContent) formContent.classList.add('hidden');
                 if (successMessage) successMessage.classList.remove('hidden');
                 lucide.createIcons();
-
                 resetForm();
             });
         }
     };
+
+    // --- Formulário de Contato para WhatsApp ---
+    const initializeContactForm = () => {
+        const contactForm = document.getElementById('contact-form');
+        if (contactForm) {
+            contactForm.addEventListener('submit', function (event) {
+                event.preventDefault(); // Impede o envio padrão
+
+                // Captura os valores dos campos do formulário de contato
+                const name = document.getElementById('name').value;
+                const email = document.getElementById('email').value;
+                const message = document.getElementById('message').value;
+                const numeroWhatsApp = '5548991140848'; // Número de WhatsApp da Dra. Vanessa
+
+                // Monta a mensagem com os dados do formulário
+                const mensagemTemplate = `Olá, Dra. Vanessa! Meu nome é *${name}*.\n\nEntro em contato através do seu site.\n\n*E-mail para retorno:* ${email}\n\n*Mensagem:*\n${message}`;
+
+                // Codifica a mensagem para ser usada em uma URL
+                const mensagemCodificada = encodeURIComponent(mensagemTemplate);
+
+                // Cria o link final para o WhatsApp
+                const linkWhatsApp = `https://wa.me/${numeroWhatsApp}?text=${mensagemCodificada}`;
+
+                // Abre o link em uma nova aba e limpa o formulário
+                window.open(linkWhatsApp, '_blank');
+                contactForm.reset();
+            });
+        }
+    };
+
 
     // --- EVENT LISTENERS GERAIS ---
     allTabButtons.forEach(button => {
@@ -300,6 +295,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initializeFlipCards();
     initializeFaq();
     initializeTestimonialForm();
+    initializeContactForm();
     lucide.createIcons();
     document.getElementById('current-year').textContent = new Date().getFullYear();
 });
