@@ -38,13 +38,9 @@ document.addEventListener('DOMContentLoaded', () => {
             lucide.createIcons();
         }
 
-        // --- CORREÇÃO "FORÇA BRUTA" DO SCROLL ---
-        if (!isInitialLoad) {
-            setTimeout(() => {
-                document.documentElement.scrollTop = 0; // Para Chrome, Firefox, IE e Opera
-                document.body.scrollTop = 0; // Para Safari
-                window.scrollTo(0, 0); // Como fallback final
-            }, 0);
+        // AJUSTE SCROLL TO TOP: Rolar para o topo da página sempre que uma aba for trocada
+        if (!isInitialLoad) { // Não rolar para o topo no carregamento inicial da página
+            window.scrollTo({ top: 0, behavior: 'auto' }); // 'auto' para um scroll instantâneo
         }
     };
 
