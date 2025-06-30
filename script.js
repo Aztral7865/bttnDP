@@ -1,4 +1,4 @@
-// script.js (versão com correção "força bruta" de scroll no mobile)
+// script.js (versão com correção "força bruta" de scroll no mobile e melhoria no carrossel de depoimentos mobile)
 document.addEventListener('DOMContentLoaded', () => {
     // --- SELETORES ---
     const allTabButtons = document.querySelectorAll('[data-tab]');
@@ -45,6 +45,8 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     // --- LÓGICA DO CARROSSEL "SOBRE MIM" ---
+    // NOTA: Esta função já está bem implementada para o carrossel JS (que não é o de depoimentos).
+    // Não precisa de alteração para o problema atual.
     const initializeJsCarousel = () => {
         const carousels = document.querySelectorAll('.js-carousel');
         carousels.forEach(carousel => {
@@ -258,6 +260,34 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
+    // --- LÓGICA PARA O CARROSSEL DEPOIMENTOS (SCROLLING CAROUSEL) ---
+    // Esta é a função para o carrossel que você quer controlar por toque.
+    const initializeScrollingCarousel = () => {
+        const scrollingCarousel = document.querySelector('.scrolling-carousel');
+        if (!scrollingCarousel) return;
+
+        const carouselSlides = scrollingCarousel.querySelector('.carousel-slides');
+
+        // Pausar a animação
+        const pauseCarousel = () => {
+            carouselSlides.style.animationPlayState = 'paused';
+        };
+
+        // Retomar a animação
+        const resumeCarousel = () => {
+            carouselSlides.style.animationPlayState = 'running';
+        };
+
+        // Eventos para Desktop (já existiam no seu CSS, mas reforçamos aqui)
+        scrollingCarousel.addEventListener('mouseenter', pauseCarousel);
+        scrollingCarousel.addEventListener('mouseleave', resumeCarousel);
+
+        // Eventos para Mobile (novidade!)
+        scrollingCarousel.addEventListener('touchstart', pauseCarousel);
+        scrollingCarousel.addEventListener('touchend', resumeCarousel);
+        scrollingCarousel.addEventListener('touchcancel', resumeCarousel); // Para casos onde o toque é interrompido
+    };
+
 
     // --- EVENT LISTENERS GERAIS ---
     allTabButtons.forEach(button => {
@@ -283,7 +313,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- INICIALIZAÇÃO DE TODAS AS FUNÇÕES ---
     setActiveTab('about', true);
-    initializeJsCarousel();
+    initializeJsCarousel(); // Carrossel "Sobre Mim"
+    initializeScrollingCarousel(); // NOVO: Carrossel de depoimentos
     initializeFlipCards();
     initializeFaq();
     initializeTestimonialForm();
