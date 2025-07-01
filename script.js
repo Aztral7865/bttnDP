@@ -247,7 +247,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const name = document.getElementById('name').value;
                 const email = document.getElementById('email').value;
                 const message = document.getElementById('message').value;
-                const numeroWhatsApp = '5548991140848';
+                const numeroWhatsApp = '5548992116200';
 
                 const mensagemTemplate = `Olá, Dra. Vanessa! Meu nome é *${name}*.\n\nEntro em contato através do seu site.\n\n*E-mail para retorno:* ${email}\n\n*Mensagem:*\n${message}`;
 
